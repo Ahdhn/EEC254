@@ -12,20 +12,20 @@ With advancement in computing science, systematic optimization, especially conve
 Topics:
 
 - Convex Sets and Convex Functions
-## Definition of convex sets with examples in electrical engineering (3 hours)
-## Definition of convex functions, basic properties, with examples in electrical engineering (3 hours)
-## Quasiconvex, log-concave, and log-convex functions, with  examples in electrical engineering (3 hours)
+  * Definition of convex sets with examples in electrical engineering (3 hours)
+  * Definition of convex functions, basic properties, with examples in electrical engineering (3 hours)
+  * Quasiconvex, log-concave, and log-convex functions, with  examples in electrical engineering (3 hours)
 - Convex Optimization Problems
-## Convex optimization problems with examples in electrical engineering (3 hours)
-## Linear, quadratic, and geometric optimization problems, with examples in electrical engineering (3 hours)
-## Semi-definite programming with examples in electrical engineering (2 hours)
+  * Convex optimization problems with examples in electrical engineering (3 hours)
+  * Linear, quadratic, and geometric optimization problems, with examples in electrical engineering (3 hours)
+  * Semi-definite programming with examples in electrical engineering (2 hours)
 - KKT Conditions and Duality
-## The Lagrange dual function and dual problem (6 hours)
-## Optimality conditions (4 hours)
-## Unconstrained and Constrained Convex Problems
-## Unconstrained optimization (3 hours)
-## Interior Point Method for constrained optimization (3 hours)
+  * The Lagrange dual function and dual problem (6 hours)
+  * Optimality conditions (4 hours)
+  * Unconstrained and Constrained Convex Problems
+  * Unconstrained optimization (3 hours)
+  * Interior Point Method for constrained optimization (3 hours)
 - Applications Examples
-## Information/Communication Theory (3 hours)
-## Circuit Design and Signal Processing (3 hours)
-## Other engineering problems (5 hours)
+  * Information/Communication Theory (3 hours)
+  * Circuit Design and Signal Processing (3 hours)
+  * Other engineering problems (5 hours)
