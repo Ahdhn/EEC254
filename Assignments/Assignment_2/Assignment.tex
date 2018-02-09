@@ -1,0 +1,146 @@
+\documentclass[12pt] {article}
+\usepackage{times}
+\usepackage[margin=1in,bottom=1in,top=1in]{geometry}
+
+\usepackage{hhline}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage[inline,shortlabels]{enumitem}%enumerate with letters
+\usepackage[square,numbers]{natbib}
+\usepackage{graphicx}
+\bibliographystyle{unsrtnat}
+\begin{document}
+
+\title{Assignment Two -  EEC254}
+\author{Ahmed H. Mahmoud}
+\date{January 30th, 2018}
+\maketitle
+
+%============Table========
+%\begin{figure}[tbh]
+% \centering    
+%\begin{tabular}{ |p{4cm}|| p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+% \hline
+% & Processor 1 &  Processor 2  & Processor 3 & Processor 4\\ \hhline{|=|=|=|=|=|}
+% \hline
+% Performance          &$1.08$        &$1.425$       &\textbf{1.52}  &   \\
+% \hline
+%\end{tabular} 
+%\caption{Metric table for the four processors}
+%   \label{tab:metric}
+%\end{figure} 
+%============Figure========
+%\begin{figure}[!tbh]
+%\centering        
+%   \subfloat {\includegraphics[width=0.65\textwidth]{fig2_4.png}}
+%   \caption{ }
+%   \label{fig:fig}
+%\end{figure}
+
+%\begin{enumerate}[(a)]
+%\end{enumerate}
+
+
+\paragraph{Problem 3.5:} 
+Since if $f(sx)$ is convex then $\int^{1}_{0}f(sx).ds$ is convex, we can use simple change of variables such that $sx=t$ and we get 
+$$
+f(sx) \rightarrow f(t)
+$$
+$$ 
+\int^{1}_{0} f(sx).ds \rightarrow \frac{1}{x}\int^{x}_{0}f(t).dt
+$$
+Thus, if $f(t)$ is convex, then its running average $\frac{1}{x}\int^{x}_{0}f(t).dt$ is also convex since change of variable is nothing but scaling which preserves the convexity. 
+
+\paragraph{Problem 3.8:} 
+The argument we are trying to prove here only works if $f$ is differentiable at least twice. We first start with $f:\mathcal{R}^{n} \rightarrow \mathcal{R}$ such that $n=1$ and then we will try to generalize the argument. First let $x,y \in dom(f)$ and $y>x$. Applying the first-order condition for convexity, we get 
+$$f(y)\geq f(x) + f^{\prime}(x)(y-x), \quad f(x)\geq f(y) + f^{\prime}(y)(x-y)$$
+Combining both inequalities, we get
+$$f(y) - f(x) \geq f^{\prime}(x)(y-x), \quad f(y) - f(x) \leq f^{\prime}(y)(x-y)$$
+$$ f^{\prime}(x)(y-x) \leq f(y) - f(x) \leq f^{\prime}(y)(x-y)$$
+We can divide the inequality by $(y-x)^{2}$ and we get 
+$$ \frac{f^{\prime}(x)}{(y-x)} \leq \frac{f(y)-f(x)}{(y-x)} \leq \frac{f^{\prime}(y)}{(x-y)}$$
+By simple manipulations to the above inequality and from the fact that $x,y \in dom(f)$, we obtain
+$$  \frac{f^{\prime}(y) - f^{\prime}(x)}{(y-x)} \geq 0$$
+We can derive the second order condition by letting $y\rightarrow x$, which gives $f^{\prime \prime}(x)\geq 0$. This implies that if $f$ is convex, then $\nabla^{2}f(x)\geq 0$. 
+
+We now try to prove the converse i.e., if $\nabla^{2}f(x)\geq 0$, then $f$ is convex. Since $f$ is differentiable, we can then use Taylor's theorem as follows
+\\\
+
+$f(y) = f(x) + f^{\prime}(y-x) + 0.5f^{\prime \prime}(z)(y-x)^{2} + \cdots,$ for some  $z \in [x,y]$. This implies $f(y) \geq f(x) + f^{\prime}(y-x)$ i.e., if we can apply the first-order condition on $f$ (which already implies that $f$ is convex), then the second-order condition is true on $f$ as well. 
+
+\paragraph{Problem 3.16:} 
+All these functions were plotted in order to check the convexity, concavity, quasiconvexity and quasiconcavity. 
+\begin{enumerate}[(a)]
+\item $f(x) = e^{x}-1$ on $\mathcal{R}$ is convex. 
+\item $f(x_{1},x_{2}) = x_{1}x_{2}$ on $\mathcal{R}^{2}_{++}$ is quasiconcave.
+\item $f(x_{1},x_{2}) = \frac{1}{x_{1}x_{2}}$ on $\mathcal{R}^{2}_{++}$ is convex.
+\item $f(x_{1},x_{2}) = \frac{x_{1}}{x_{2}}$ on $\mathcal{R}^{2}_{++}$ is convex.
+\item $f(x_{1},x_{2}) = \frac{x_{1}^{2}}{x_{2}}$ on $\mathcal{R} \times \mathcal{R}^{2}_{++}$ is convex. 
+\item $f(x_{1},x_{2}) = \frac{x_{1}^{\alpha}}{x_{2}^{1-\alpha}},\ \alpha \in [0,1]$ on $\mathcal{R}^{2}_{++}$ only changes the Hessian matrix of $(b)$ by a positive factor, thus it is convex. 
+
+\end{enumerate}
+
+\paragraph{Problem 3.18:} 
+
+\begin{enumerate}[(a)]
+%https://math.stackexchange.com/questions/297635/is-the-trace-of-inverse-matrix-convex
+\item Following the proof of concavity of the log-determinant function, we start by considering the arbitrary line $X = Z + tV$, where $Z, V \in \mathcal{S}^{n}$. We define $g(t)=f(Z+tV)$ such that $g$ is restricted to the values of $t$ for which $Z+tV \succ 0$. WLOG, we can assume that $t=0$ is inside this interval i.e., $Z \succ 0$ (symmetric positive definite). Following this, we have
+$$
+g(t) = tr((Z+tV)^{-1})
+$$
+$$
+g(t) = tr(Z^{-1} (I+tZ^{-1}V)^{-1})
+$$
+$$
+g(t) = tr(Z^{-1} - tZ^{-1}VZ^{-1} + t^{2}Z^{-1}VZ^{-1}VZ^{-1}+\cdots)
+$$
+In order to prove the convexity of $f(X)$ with $dom(f)=\mathcal{S}^{n}_{++}$, we are going to use the second-order condition i.e., $\frac{d^{2}}{dt^{2}} g(t) \geq 0$ when $t=0$
+$$
+\frac{d^{2}}{dt^{2}} g(t) \bigg|_{t=0} = \frac{d^{2}}{dt^{2}} tr((Z+tV)^{-1}) \bigg|_{t=0} = 2tr(Z^{-1}VZ^{-1}VZ^{-1})
+$$
+We can recognize that $Z^{-1}VZ^{-1}VZ^{-1}$ can be rewritten as $QZ^{-1}Q^{T}$ where $Q=Z^{-1}V$ and $Q^{T}=VZ^{-1}$. Since $Z$ is positive definite, then $Z^{-1}$ is also positive definite and so as $QZ^{-1}Q^{T}$. From that we conclude $tr(QV^{-1}Q^{T})\geq 0$ since the trace is the sum of all eigenvalues which are non-negative for positive definite matrix. Thus, $f(X)$ is convex. 
+\item Following the same steps as in (a) but now we have $f(X) = (det(X))^{\frac{1}{n}}$, we get
+$$
+g(t) = (det(Z+tV))^{\frac{1}{n}} = \left(det \left( Z^{\frac{1}{2}} \left( I+tZ^{\frac{-1}{2}}VZ^{\frac{-1}{2}}\right)Z^{\frac{1}{2}}\right)\right)^{\frac{1}{n}}
+$$
+$$
+g(t) = \left(det\left(Z^{\frac{1}{2}}\right) det\left(I+tZ^{\frac{-1}{2}}VZ^{\frac{-1}{2}}\right) det\left(Z^{\frac{1}{2}}\right) \right)^{\frac{1}{n}}
+$$
+Since the determinant of a matrix is equal to the product of its eigenvalues, we get 
+$$
+g(t) = \left(det\left(Z\right)\right)^{\frac{1}{n}}\left( \prod^{n}_{i=1}(1+t\lambda_{i}) \right)^{\frac{1}{n}}
+$$
+where $\lambda_{i}$ are the eigenvalues of $Z^{\frac{-1}{2}}VZ^{\frac{-1}{2}}$.  Since $det(Z) > 0$ (positive definite) and since the geometric mean (Example 3.14) is concave, then $f(X)$ is concave. 
+
+\end{enumerate}
+
+\paragraph{Problem 3.20:} 
+\begin{enumerate}[(a)]
+\item We can adapt the definition of epigraph of both functions from which $f(x) = \left\Vert Ax -b \right\Vert$ would be like taking a convex subset of a convex set which would result into convex set. Thus, $f(x)$ is convex. 
+\item From \textbf{Problem 3.18 (b)}, we have proven that $det(X)^{\frac{1}{n}}$ is a concave function. Thus, $-det(X)^{\frac{1}{n}}$ is convex function. Since $det(A+B) = det(A) + det(B)$, then $f(x)$ is just an affine combination of convex functions. Thus, $f(x)$ is convex function. 
+\item Using the fact that $tr(X^{-1})$ is convex on $\mathcal{S}^{m}_{++}$, $f(X)$ applies affine transformation on $X$ (before applying the function) which results into a convex function. 
+\end{enumerate}
+
+\paragraph{Problem 3.26:} 
+\begin{enumerate} [(a)]
+\item 1) Taking the supremum of a convex functions is convex (using the definition of epigraph, the supremum becomes the intersection of the graphs/convex sets). 2) The trace of positive semi definite function is convex. From (1) and (2), we find that the sum of k largest eigenvalues is convex. 
+
+\item The same argument we made in (a) is similar here but instead of taking the supremum we take the infimum which results into concave function. Thus the geometric mean of k smallest eigenvalues is concave function. 
+
+\item Since taking the log of product is equivalent to taking the sum of logs which both (sum and log) preserves convexity. Following the similar argument in (a) and (b), the log of product if k smallest eigenvalues is concave function. 
+
+
+\end{enumerate}
+\paragraph{Problem 3.43:} 
+%https://math.stackexchange.com/questions/2007482/differentiable-quasiconvex-functions-first-order-conditions
+The definition of quasiconvex function $f(x)$ is for $x,y \in dom(f)$ we have $f(x+\theta (y-x)) \leq max \left\lbrace  f(x), f(y) \right\rbrace ,\ \forall \theta \in [0,1]$ and
+
+
+Let $f(x)\geq f(y)$, the proof by contraindication goes as following. Let $f(z)> max \left\lbrace f(x),f(y) \right\rbrace$ for $z = x + \theta(y-z)$, $\theta \in [0,1]$ and $x,y \in dom(f)$. Then we have $f(z)>f(x)\geq f(y)$. This implies that $\nabla f(z)^{T}(x-z)\leq 0$ and $\nabla f(z)^{T}(y-z)\leq 0$. Since $x-z=\theta (x-y)$ and $y-z = (1-\theta)(y-x)$ (from how we define $z$), we then have $\nabla f(z)^{T}(x-y)=0$. 
+
+Pick $z^{*}$ to be the minimum possible value for $z$. For some $\theta$, since $z^{*} > x$ and $f(z^{*})>f(x)$, there must exist 
+$z^{\prime}$ in the space between $x$ and $z^{*}$ such that $f(z^{*}) >f(z^{\prime}) >f(x)$. But also we have $z^{\prime}<z^{*}$ which rises a contradiction. Thus, if $f(y)\leq f(x)$, this should always imply that $\nabla f(x)^{T}(y-x)\leq 0$. 
+\bibliography{mybib}
+
+
+\end{document}
