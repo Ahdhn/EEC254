@@ -1,0 +1,188 @@
+\documentclass[12pt] {article}
+\usepackage{times}
+\usepackage[margin=1in,bottom=1in,top=1in]{geometry}
+
+\usepackage{hhline}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage[inline,shortlabels]{enumitem}%enumerate with letters
+\usepackage{mathrsfs} 
+\usepackage[square,numbers]{natbib}
+\usepackage{graphicx}
+\bibliographystyle{unsrtnat}
+\begin{document}
+
+\title{Assignment Four -  EEC254}
+\author{Ahmed H. Mahmoud}
+\date{February 13th, 2018}
+\maketitle
+
+%============Table========
+%\begin{figure}[tbh]
+% \centering    
+%\begin{tabular}{ |p{4cm}|| p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+% \hline
+% & Processor 1 &  Processor 2  & Processor 3 & Processor 4\\ \hhline{|=|=|=|=|=|}
+% \hline
+% Performance          &$1.08$        &$1.425$       &\textbf{1.52}  &   \\
+% \hline
+%\end{tabular} 
+%\caption{Metric table for the four processors}
+%   \label{tab:metric}
+%\end{figure} 
+%============Figure========
+%\begin{figure}[!tbh]
+%\centering        
+%   \subfloat {\includegraphics[width=0.65\textwidth]{fig2_4.png}}
+%   \caption{ }
+%   \label{fig:fig}
+%\end{figure}
+
+%\begin{enumerate}[(a)]
+%\end{enumerate}
+
+
+\paragraph{Problem 4.21:} 
+(a),(b). We consider first the general case in which the center of the ellipsoid is not the origin (b) and then set the center to be zero to solve (a). Since the function is linear, its minimum must be on the boundary of the ellipsoid. Thus, we can convert the inequality to equality. We use change of variable to scale the ellipsoid such that it becomes a unit ball. For that we define $y = A^{\frac{1}{2}}(x-x_{c})$. Thus, $x = A^{\frac{-1}{2}}y +x_{c}$. The problem then becomes 
+\[
+\begin{array}{cl}
+\text{minimize} & c^{T}A^{\frac{-1}{2}}y +c^{T}x_{c}\\
+\text{subject to} & y^{T}y \leq 1\\
+\end{array} 
+\]
+which is a minimization of linear function over unit ball for which the solution is 
+$$
+y^{*} = \frac{-A^{\frac{-1}{2}}c}{||A^{\frac{-1}{2}}c||_{2}} \quad \quad x^{*} = x_{c} - \frac{A^{-1}c}{||A^{\frac{-1}{2}}c ||_{2}} \quad \quad p^{*}= c^{T}x_{c} - \frac{c^{T}A^{-1}c}{||A^{\frac{-1}{2}}c ||_{2}}
+$$
+
+Thus, the solution for (a) (by setting the center to zero) is 
+$$
+x^{*} = - \frac{A^{-1}c}{||A^{\frac{-1}{2}}c ||_{2}} \quad \quad p^{*}= - \frac{c^{T}A^{-1}c}{||A^{\frac{-1}{2}}c ||_{2}}
+$$
+(c)
+\paragraph{Problem 4.40:} 
+\begin{enumerate}
+\item  \textbf{LP:}
+\[
+\begin{array}{cl}
+\text{minimize} & c^{T}x +d\\
+\text{subject to} & diag(Gx - h) \preceq 0\\
+&Ax = b
+\end{array} 
+\]
+\item 
+\begin{enumerate}
+%section 16.8.1 http://users.math.msu.edu/users/markiwen/Teaching/MTH995/Papers/SDP_notes_Marina_Epelman_UM.pdf 
+\item \textbf{QP:} The QP is written as 
+\[
+\begin{array}{cl}
+\text{minimize} & x^{T}Px+q^{T}x+r\\
+\text{subject to} & Gx \preceq h\\
+&Ax = b
+\end{array} 
+\]
+which can be re-written in its epigraph form as 
+\[
+\begin{array}{cl}
+\text{minimize} & t\\
+\text{subject to} & x^{T}Px + q^{T}x + r - t \leq 0 \\
+& Gx \preceq h\\
+&Ax = b
+\end{array} 
+\]
+Since $P$ is symmetric and positive semidefinite, then we can write $P=Q^{T}Q$. From this we have this equivalence  
+\[
+\left[
+\begin{array}{cc}
+I & Qx \\
+x^{T}Q^{T} & -r-q^{T}x
+\end{array} 
+\right]
+\succeq 0 
+\quad \Longleftrightarrow  \quad 
+x^{T}Px + q^{T}x + r \preceq 0 
+\]
+Thus we can write QP as follows 
+\[
+\begin{array}{cl}
+\text{minimize} & t\\
+
+\text{subject to} & \left[ \begin{array}{cc}
+                     I & Qx \\
+                     x^{T}Q^{T} & -r-q^{T}x + t
+                     \end{array} \right] \succeq 0 \\
+                   & diag(Gx - h) \preceq 0 \\
+&Ax = b
+\end{array} 
+\]
+in $x$ and $t$.
+\item \textbf{QCQP:} The QCQP is written as 
+\[
+\begin{array}{cl}
+\text{minimize} & x^{T}P_{0}x+q_{0}^{T}x+r_{0}\\
+\text{subject to} & x^{T}P_{i}x+q_{i}^{T}x+r_{i} \leq 0, \quad i=1,\cdots,m\\
+&Ax = b
+\end{array} 
+\]
+Following the same logic in QP reformation and apply the equivalence to the constraints as well, we can rewrite QCQP problem as follows 
+\[
+\begin{array}{cl}
+\text{minimize} & t\\
+
+\text{subject to} & \left[ \begin{array}{cc}
+                     I & Q_{0}x \\
+                     x^{T}Q_{0}^{T} & -r_{0}-q_{0}^{T}x + t
+                     \end{array} \right] \succeq 0 \\
+                     \\
+                  &  \left[ \begin{array}{cc}
+                     I & Q_{i}x \\
+                     x^{T}Q_{i}^{T} & -r_{i}-q_{i}^{T}x
+                     \end{array} \right] \succeq 0, \quad i=1,\cdots, m \\
+                  &Ax = b
+\end{array} 
+\]
+in $x$ and $t$.
+ 
+\item \textbf{SOCP:}
+The SOCP is written as 
+\[
+\begin{array}{cl}
+\text{minimize} & f^{T}x\\
+\text{subject to} & ||A_{i}x +b_{i} ||_{2} \leq c_{i}^{T}x+d_{i}, \quad i=1,\cdots,m\\
+&Fx = g
+\end{array} 
+\]
+From the given hint (Schur complement), we can rewrite the constraints in matrix form and the problem becomes 
+\[
+\begin{array}{cl}
+\text{minimize} & f^{T}x\\
+\text{subject to} & \left[ \begin{array}{cc}
+                     (c_{i}^{T}x+d_{i})I & A_{i}x+b_{i} \\
+                     (A_{i}x+b_{i})^{T} & c_{i}^{T}x+d_{i} \\
+                     \end{array} \right] \succeq 0 \quad i=1,\cdots,m\\
+&Fx = g
+\end{array} 
+\]
+\end{enumerate}
+%page 201 https://ac.els-cdn.com/S0024379598100320/1-s2.0-S0024379598100320-main.pdf?_tid=a74d4f58-102d-11e8-8b22-00000aacb360&acdnat=1518465070_34dd186466ba8d450d40f6eabdb40beb
+\item We take $F(x) \succ 0 $ as the constraints of the problem. It follows directly from Schur complement that the problem can be re-written as 
+\[
+\begin{array}{cl}
+\text{minimize} & t\\
+\text{subject to} & \left[ \begin{array}{cc}
+					F(x)       & Ax+b\\
+					(Ax+b)^{T} & t
+                     \end{array} \right] \succeq 0 \\
+\end{array} 
+\]
+
+
+
+
+\end{enumerate}
+\paragraph{Problem 4.42:} 
+$\mathscr{I}$
+\paragraph{Problem 4.50:} 
+ 
+\bibliography{mybib}
+\end{document}
