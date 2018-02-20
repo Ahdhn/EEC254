@@ -5,6 +5,7 @@
 \usepackage{hhline}
 \usepackage{subfig}
 \usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage[inline,shortlabels]{enumitem}%enumerate with letters
 \usepackage{mathrsfs} 
 \usepackage[square,numbers]{natbib}
@@ -59,7 +60,29 @@ Thus, the solution for (a) (by setting the center to zero) is
 $$
 x^{*} = - \frac{A^{-1}c}{||A^{\frac{-1}{2}}c ||_{2}} \quad \quad p^{*}= - \frac{c^{T}A^{-1}c}{||A^{\frac{-1}{2}}c ||_{2}}
 $$
-(c)
+(c) Here we may distinguish between to different cases; 1) one where the optimal value lies inside in the interior of the ellipsoid and 2) one where the optimal value is one the boundary of the ellipsoid. Figure ~\ref{fig:ell} shows the two different cases (here we shifted the ellipsoid but in reality the function is the one that is shifted).
+
+To simplify things, we will use change of variables we used above to convert the problem to minimizing quadratic function over a unit sphere. Let $y = A^{\frac{1}{2}}x$. Thus $x = A^{\frac{-1}{2}}y $ and the problem becomes 
+\[
+\begin{array}{cl}
+\text{minimize} & y^{T}A^{\frac{-1}{2}} B A^{\frac{-1}{2}}y\\
+\text{subject to} & y^{T}y \leq 1\\
+\end{array} 
+\]
+When the optimal is inside the ellipsoid, the gradient must be zero. From that we have $A^{\frac{-1}{2}}BA^{\frac{1}{2}}y=0$ and thus the optimal value is zero (since $A \succ 0$). When the optimal is on the boundary of the ellipsoid, this requires $y^{T}y = 1$. This means that the optimal value is the one that obtains the minimum of $A^{\frac{-1}{2}} B A^{\frac{-1}{2}}$ for $A^{\frac{-1}{2}} B A^{\frac{-1}{2}} \neq 0$.
+
+For the nonconvex extension, we will still seek the gradient to be zero (i.e., the optimal value is inside the ellipsoid) and the solution is similar to the convex case. Otherwise, there could be many solutions for the second case. 
+
+\begin{figure}[!tbh]
+\centering
+\subfloat [Optimal value inside the ellipsoid ] {\includegraphics[width=0.45\textwidth]{ell_inside.png}}
+\subfloat [Optimal value on the boundary the ellipsoid] {\includegraphics[width=0.45\textwidth]{ell_insect.png}}
+   \caption{The two different cases of Problem 4.21 (c). }
+   \label{fig:ell}
+\end{figure}
+
+
+
 \paragraph{Problem 4.40:} 
 \begin{enumerate}
 \item  \textbf{LP:}
@@ -181,8 +204,38 @@ From the given hint (Schur complement), we can rewrite the constraints in matrix
 
 \end{enumerate}
 \paragraph{Problem 4.42:} 
-$\mathscr{I}$
+In order to prove the relation we shall use the definition of positive semi-definite Hermitian matrix. Let $c$ be a complex vector such that $c= u+iv$. Then we have $c^{H}Xz = (u-iv)^{T}(\mathscr{R}X + i\mathscr{I}X)(u+iv)$. This equation can be written in matrix form as 
+
+\[
+\left[
+\begin{array}{cc}
+u^{T} & v^{T}
+\end{array} 
+\right]
+\left[
+\begin{array}{cc}
+\mathscr{R}X & -\mathscr{I}X\\
+\mathscr{I}X & \mathscr{R}X
+\end{array} 
+\right]
+\left[
+\begin{array}{c}
+u\\
+v
+\end{array} 
+\right]
+\]
+The above is only (component-wise) greater than or equal to zero iff $X\succeq 0$. The conversion is done by breaking down the complex LMI into two pieces; one for the real part and the other for the complex part and operate on them separately. 
 \paragraph{Problem 4.50:} 
+\begin{enumerate}[(a)]
+\item From the plot $||x_{ls}||_{2} \approx 2.5$
+\item From the plot $||Ax_{ls} - b||_{2} \approx 2.5$
+\item We look for the point for the point where $x=0$ and check the corresponding $||Ax-b||^{2}_{2}$ which becomes just $||-b||^{2}_{2}$ . Thus $||b||_2=\sqrt{10}$.
+\item The optimal value $\approx 5$
+\item The optimal value $\approx 5$
+\item The optimal value $\approx 8$
+\item Since $A\in \mathbb{R}^{100\times 10}$ and the solution for $||Ax-b||^{2}$ is unique, then $rank(A)=10$.
+\end{enumerate}
  
 \bibliography{mybib}
 \end{document}

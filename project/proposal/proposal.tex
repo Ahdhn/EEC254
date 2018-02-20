@@ -1,0 +1,73 @@
+\documentclass[12pt] {article}
+\usepackage{times}
+\usepackage[margin=1in,bottom=1in,top=0.5in]{geometry}
+
+\usepackage{hhline}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[inline,shortlabels]{enumitem}%enumerate with letters
+\usepackage{mathrsfs} 
+\usepackage[square,numbers]{natbib}
+\usepackage{graphicx}
+\usepackage{natbib}
+
+\begin{document}
+\bibliographystyle{apalike}
+\title{
+Project Proposal -  EEC254 \\
+\begin{large}
+Floor Planning via Convex Optimization
+\end{large}
+}
+\author{Ahmed H. Mahmoud}
+\date{}
+\maketitle
+
+%============Table========
+%\begin{figure}[tbh]
+% \centering    
+%\begin{tabular}{ |p{4cm}|| p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+% \hline
+% & Processor 1 &  Processor 2  & Processor 3 & Processor 4\\ \hhline{|=|=|=|=|=|}
+% \hline
+% Performance          &$1.08$        &$1.425$       &\textbf{1.52}  &   \\
+% \hline
+%\end{tabular} 
+%\caption{Metric table for the four processors}
+%   \label{tab:metric}
+%\end{figure} 
+%============Figure========
+%\begin{figure}[!tbh]
+%\centering        
+%   \subfloat {\includegraphics[width=0.65\textwidth]{fig2_4.png}}
+%   \caption{ }
+%   \label{fig:fig}
+%\end{figure}
+
+%\begin{enumerate}[(a)]
+%\end{enumerate}
+
+Floor planning problem tries to find the optimal position and/or dimensions of geometric objects (commonly rectangles) within a space such that there is no overlap between the shapes. The objects are aligned with the axes. There could be some constraints on the objects e.g., area-constraints, height/length constraints, and positions constraints. The objective is usually to minimize the size (e.g., area, volume, perimeter) of the bounding box. The non-overlapping constraints make the general floor planning a complicated combinatorial optimization problem. However, if the relative positioning of the boxes is specified, several types of floor planning problems can be formulated as convex optimization problem. 
+
+
+In the project we would like to follow the lead of \citep{moh1996globally, chen1998convex, young2000floorplan} where the floor planning problem was formulated as geometric programming problem. By doing that the global optimum can be found using standard convex optimization techniques. However, these previous work only considered the basic constraints i.e., the objects area constraints, width constraints, height constraints and aspect ration constraints. In this project we would like to also consider more constraints and try to inject these new constraints into the geometric programming formulation of the problem. Additional constraints we might consider includes the following 
+\begin{itemize}
+\item Minimum spacing between the objects,
+\item Alignment constraints where we impose that two edges or objects centers to be aligned, 
+\item Symmetry constraints about either axes of the bounding box, 
+\item Similarity constraints where one object is a scaled version of another object, and 
+\item Distance constraints where we impose constraints to limit the distance between pairs of objects. 
+\end{itemize}
+
+\paragraph{Deliverable:} Upon the complication of this project, we wish to deliver the following:
+\begin{itemize}
+\item Formulation of the basic floorplanning problem as a convex optimization problem
+\item Adding new constraints to the above formulation and re-formulating as convex optimization
+\item Providing a solution for the floorplanning with additional constraints based on the aforementioned formulation
+\item Providing few numerical experiments using MATLAB and CVX package
+\end{itemize}
+Our guarantee that the addition of new constraints will not disturb the convexity of the problems stems from Boyd's book~\citep{boyd2004convex} where it is mentioned that additional constraints can be introduced while maintaining the convexity of the problem. However, this was not explicitly detailed in the book.
+
+\bibliography{mybib}
+\end{document}

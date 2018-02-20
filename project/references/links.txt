@@ -1,0 +1,2 @@
+https://github.com/bojan-karlas/floor-planning
+http://web.cvxr.com/cvx/examples/cvxbook/Ch08_geometric_probs/html/floor_plan.html
