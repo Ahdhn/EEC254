@@ -58,23 +58,23 @@ Floor planning problem tries to find the optimal position and/or dimensions of g
 
 %===========================================
 \section{System Model}
-We consider $N$ axis-aligned cells ($c_{1}, \cdots, c_{N}$) in 2D each specified by its lower-left corner $(x_{i}, y_{i})$, height $h_{i}$, and width $w_{i}$. The cells are configured inside a bounding rectangle (BR) of height $H$, width $W$, and the origin as its lower-left corner. The cells are always desired to not overlap. This constraint makes the general floor-planning a complicated combinatorial optimization problem. However, if the relative positioning of the cells is specified, the floor-planning problem can be cast as convex optimization. 
+We consider $N$ axis-aligned cells ($c_{1}, \cdots, c_{N}$) in 2D each specified by its lower-left corner $(x_{i}, y_{i})$, height $h_{i}$, and width $w_{i}$. The cells are configured inside a bounding rectangle of height $H$, width $W$, and the origin as its lower-left corner. The cells are always desired to not overlap. This constraint makes the general floor-planning a complicated combinatorial optimization problem. However, if the relative positioning of the cells is specified, the floor-planning problem can be cast as convex optimization. 
 \subsection*{Variables}
 The variables of the optimization problem are the position and size of the cells ($x_{i}, y_{i}, h_{i}, w_{i}$ for $i=1,\cdots, N$) and the size of the bounding rectangle ($H$, $W$). 
 \subsection*{Objectives} 
 There are two different objectives that the problem of floor-planning may try to achieve either of them 
 \begin{enumerate}
-\item Minimizing the are of the bounding rectangle of fixed-size cells. Here we consider minimizing the perimeter of the bounding rectangle since the area is a non-convex function and its log is concave function.
-\item Maximizing the area of the cells for a fixed-size bounding rectangle. We take log are of the cell i.e., $max (log(w_{i})+log(h_{i}))$ for $i=1,\cdots, N$. This is a multi-criterion problem with $N$ objective function which can be scalarized by take the sum of all objective function, thus maximizing $\sum_{i=1}^{N}(log(w_{i})+log(h_{i}))$.
+\item Minimizing the are of the bounding rectangle. Here we consider minimizing the perimeter of the bounding rectangle since the area is a non-convex function and its log is concave function.
+\item Maximizing the area of the cells for a fixed-size bounding rectangle. We take log area of the cell i.e., $max (log(w_{i})+log(h_{i}))$ for $i=1,\cdots, N$. This is a multi-criterion problem with $N$ objective function which can be scalarized by take the sum of all objective function, thus maximizing $\sum_{i=1}^{N}(log(w_{i})+log(h_{i}))$.
 \end{enumerate}
 \subsection*{Constraints}
 Some or all of the following constraints maybe considered in the floor-planning problem
 \begin{itemize}
-\item non-overlapping constraints: or $\textbf{int}(c_{i}\cap c_{j})=\phi$, $i \neq j $. We achieve this by imposing relative position instead using two binary relations on the indices $\left\lbrace 1,\cdots, N \right\rbrace : \mathscr{L}$ and  $\mathscr{U}$ means \emph{left of} and \emph{under} respectively. Two relations are sufficient because the left/right and under/above are pairs of anti-symmetric, transitive relations. For example, if $(i,j)\in \mathscr{L}$, then $c_{i}$ is left of $c_{j}$ and thus $x_{i}+w_{i}\leq x_{j}$. To ensure full description of all relative positions, we require for each $(i,j)$ with $i\neq j$, one of the following holds 
+\item non-overlapping constraints: or $\textbf{int}(c_{i}\cap c_{j})=\phi$, $i \neq j $. We achieve this by imposing relative position using two binary relations on the indices $\left\lbrace 1,\cdots, N \right\rbrace : \mathscr{L}$ and  $\mathscr{U}$ means \emph{left of} and \emph{under} respectively. Two relations are sufficient because the left/right and under/above are pairs of anti-symmetric, transitive relations. For example, if $(i,j)\in \mathscr{L}$, then $c_{i}$ is left of $c_{j}$ and thus $x_{i}+w_{i}\leq x_{j}$. To ensure full description of all relative positions, we require for each $(i,j)$ with $i\neq j$, one of the following holds 
 $$(i,j)\in \mathscr{L} \qquad (j,i)\in \mathscr{L} \qquad (i,j)\in \mathscr{U} \qquad (j,i)\in \mathscr{U} $$
 This will give $N(N-1)/2$ inequalities. Using the transitivity of the relation, the number of inequalities can be greatly reduced.
 
-\item minimum spacing constraints: To avoid tight packing, imposing a minimum psotive spacing $\rho$ is possible. This changes the interpretation of $(i,j)\in \mathscr{L}$ to mean $x_{i}+w_{i}+\rho \leq x_{j}$. 
+\item minimum spacing constraints: in case avoiding tight packing is desirable, imposing a minimum positive spacing $\rho$ is possible. This changes the interpretation of $(i,j)\in \mathscr{L}$ to mean $x_{i}+w_{i}+\rho \leq x_{j}$. 
 \item bounding constraints: $x_{i}\geq0, y_{i}\geq0, x_{i}+w_{i}\leq W, y_{i}+h_{i}\leq H$ for $i=1,\cdots, N$. 
 \item minimum cell area constraints: formulated as $log(w_{i})+log(h_{i}) \geq log(A_{i}^{min})$ or $\sqrt{h_{i}w_{i}}\geq \sqrt{A_{i}^{min}}$ where $A_{i}^{min}$ is cell $i$ minimum area constraint. 
 \item aspect-ratio constraints: aspect-ratio is the ratio of height over width. The constraint is $\omega_{i}^{min}\cdot w_{i}\leq h_{i} \leq \omega_{i}^{max}\cdot w_{i}$ where $\omega_{i}^{min}$ and $\omega_{i}^{max}$ is the minimum and maximum aspect ratio constraints for the cell $i$.
@@ -90,7 +90,7 @@ This will give $N(N-1)/2$ inequalities. Using the transitivity of the relation, 
 \subsection*{Primal Problem}
 Here we formulate the primal and dual optimization problems of the floor planning. We will examine floor-planning problem in which we are trying to minimize the area of the bounding rectangle with no-overlapping, minimum area, and aspect ratio constraints. 
 
-The relative positions relations $\mathscr{L}$ and $\mathscr{U}$ can be placed by matrices $L$ and $U$ such that 
+The relative positions relations $\mathscr{L}$ and $\mathscr{U}$ can be placed by matrices $L$ and $U$~\citep{moh1996globally} such that 
 \begin{small}
 \[
 \begin{array}{cc}
@@ -224,7 +224,7 @@ heuristics algorithm that operates by randomize the area array and then iterates
 
 %===========================================
 \section{Conclusion}
-In this project, we showed the full formulation of the floor planning problem and how it can be solved as geometric programming problem while considering the majority of constraints taken into account in practice. Despite that we proposed to consider even more constraints, we found that considering less constraints is a problem that could happen more often in practice. We showed that it is better to have automated tool to assign the relative positions is better than assign them at random. 
+In this project, we showed the full formulation of the floor planning problem and how it can be cast as geometric programming problem while considering the majority of constraints taken into account in practice. Despite that we proposed to consider even more constraints, we found that considering less constraints is a problem that could happen more often in practice. We showed that it is better to have automated tool to assign the relative positions rather than than assign them at random. This eliminates the burden of assigning the relative positions manually which can be a daunting task. 
 
 \bibliography{mybib}
 \end{document}
