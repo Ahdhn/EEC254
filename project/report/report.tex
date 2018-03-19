@@ -14,7 +14,7 @@
 \usepackage{color}
 \usepackage[mathscr]{euscript}
 \usepackage{wrapfig}
-
+\usepackage{hyperref}
 \begin{document}
 \bibliographystyle{apalike}
 \title{
@@ -51,10 +51,10 @@ Floor Planning via Convex Optimization
 %\begin{enumerate}[(a)]
 %\end{enumerate}
 
-\section{Abstract}
+%\section{Abstract}
 %===========================================
 \section{Introduction}
-Floor planning problem tries to find the optimal position and/or dimensions of geometric objects (commonly rectangles) within a space such that there is no overlap between them. We refer to the objects as \emph{cells} which are axis-aligned. There could be some constraints on the cells e.g., area-constraints, aspect ratio constraints, and positions constraints. The objective is usually to minimize the size (e.g., area, volume, perimeter) of the bounding rectangle or maximize the size of the cells. \begin{LARGE}\color{red}Motivation\end{LARGE}.
+Floor planning problem tries to find the optimal position and/or dimensions of geometric objects (commonly rectangles) within a space such that there is no overlap between them. We refer to the objects as \emph{cells} which are axis-aligned. There could be some constraints on the cells e.g., area-constraints, aspect ratio constraints, and positions constraints. The objective is usually to minimize the size (e.g., area, volume, perimeter) of the bounding rectangle or maximize the size of the cells.
 
 %===========================================
 \section{System Model}
@@ -207,7 +207,7 @@ To tackle this problem, we utilize a divide-and-conquer style algorithm to make 
 
 %===========================================
 \section{Results}
-We implement the floor planning optimization problem without relative position constraints. Our implementation is done onto of CVX library in MATLAB. Dividing the cells into (almost-)equal groups is a \emph{partition} problem for which we implemented a %greedy  algorithm that operates by sorting the input areas in ascending order. It then iterates over the sorted areas and assigns them to the group with least sum areas. 
+We implement the floor planning optimization problem without relative position constraints. Our implementation is done onto of CVX library in MATLAB. The code can be found under \url{https://github.com/Ahdhn/EEC254/blob/master/project/code/floor_planning.m}. Dividing the cells into (almost-)equal groups is a \emph{partition} problem for which we implemented a %greedy  algorithm that operates by sorting the input areas in ascending order. It then iterates over the sorted areas and assigns them to the group with least sum areas. 
 heuristics algorithm that operates by randomize the area array and then iterates over randomized array and assigns the processed area to the group with least sum. The algorithm takes $O(nlog(n))$ where $n$ is the size of input area array. We compared our implementation using two models of 60 and 32 cells. The aspect ratio bounds are set to be between 0.5 and 2.0. We did our comparison against the solution given by Boyd et al.~\citep{boyd2004convex} as shown in Figure ~\ref{fig:comp}. Our solution have achieved better more tightly packed cells where the wasted area is $0\%$ and $1\%$ for the 32 and 60 cells respectively while Boyd et al. solution wasted area is $~38\%$ for both cases. 
 
 \begin{figure}[!tbh]
